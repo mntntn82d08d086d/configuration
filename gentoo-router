@@ -3,9 +3,36 @@ pc: asus 1015pd on Intel Atom N455 1C/2T - ram 2GB
 
 #make.conf
 COMMON_CFLAGS="-O2 -march=atom -mmmx -msse -msse2 -msse3 -mssse3 -fomit-frame-pointer -g0
+
+ACCEPT_LICENSE="*"
+
 FEATURES="buildpkg candy cgroup clean-logs fail-clean nodoc noinfo noman"
 
 BINPKG_COMPRESS="xz"
 BINPKG_COMPRESS_FLAGS="-9e"
 
 INSTALL_MASK="*.pdf README* CHANGE* Change* "
+
+#localtime
+ln -sf ../usr/share/zoneinfo/Europe/Rome localtime
+
+#locale.gen
+en_US ISO-8859-1
+en_US.UTF-8 UTF-8
+it_IT ISO-8859-1
+it_IT@euro ISO-8859-15
+it_IT.UTF-8 UTF-8
+
+locale-gen
+
+eselect locale set 10
+
+#/etc/env.d/02locale
+LC_COLLATE="C.UTF-8"
+
+env-update && source /etc/profile && export PS1="(chroot) $PS1"
+
+emerge -av linux-firmware
+
+emerge -av installkernel-systemd-boot
+
