@@ -1,1 +1,11 @@
+GENTOO ROUTER
+pc: asus 1015pd on Intel Atom N455 1C/2T - ram 2GB
 
+#make.conf
+COMMON_CFLAGS="-O2 -march=atom -mmmx -msse -msse2 -msse3 -mssse3 -fomit-frame-pointer -g0
+FEATURES="buildpkg candy cgroup clean-logs fail-clean nodoc noinfo noman"
+
+BINPKG_COMPRESS="xz"
+BINPKG_COMPRESS_FLAGS="-9e"
+
+INSTALL_MASK="*.pdf README* CHANGE* Change* "
